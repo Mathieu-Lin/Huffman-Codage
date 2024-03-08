@@ -6,4 +6,5 @@
  *
  */
 module HuffmanCodage {
+	requires java.desktop;
 }
