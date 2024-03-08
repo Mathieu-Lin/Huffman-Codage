@@ -1,6 +1,8 @@
 package modele;
 
-import java.io.File;
+import java.util.Map;
+
+//import java.io.File;
 
 
 
@@ -23,10 +25,12 @@ public class Tester {
             System.out.println("Le fichier n'existe pas !");
         }
         */
-		Reader r = new Reader("textesimple.txt");
+		Reader r = new Reader("alice.txt");
 		
 		System.out.println(r.getContenu().get(0));
 		HuffmanCodage hfc = new HuffmanCodage(r.getContenu());
+		Map<String, Integer> donnees = hfc.transformData();
+		hfc.afficherListCompressedData();
 		
 	}
 
