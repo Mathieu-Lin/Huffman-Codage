@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author xizhi
+ *
+ */
+module HuffmanCodage {
+}
