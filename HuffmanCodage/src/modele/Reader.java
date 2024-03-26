@@ -14,6 +14,7 @@ public class Reader {
 	 */
 	private String nomFichier; // Nom du fichier
 	private ArrayList<String>contenu = new ArrayList<String>();
+	private String texteBrut ;
 	/*********
 	 * Constructeur
 	 */
@@ -23,10 +24,14 @@ public class Reader {
 		// Essaie
         try (BufferedReader br = new BufferedReader(new FileReader(this.nomFichier))) {
             String ligne; // Une ligne du fichier
+            StringBuilder sb = new StringBuilder();
+            this.texteBrut = br.toString();
             // Répéter jusqu'à la fin de la ligne du fichier
             while ((ligne = br.readLine()) != null) { 
                 contenu.add(ligne); // Ajoute la ligne au contenu
+                sb.append(ligne).append("\n"); // Ajoute la ligne au texte brut
             }
+            this.texteBrut = sb.toString(); // Convertit le StringBuilder en String
         // En cas d'erreur
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,6 +59,14 @@ public class Reader {
 
 	public void setContenu(ArrayList<String> contenu) {
 		this.contenu = contenu;
+	}
+
+	public String getTexteBrut() {
+		return texteBrut;
+	}
+
+	public void setTexteBrut(String texteBrut) {
+		this.texteBrut = texteBrut;
 	}
 
 	
