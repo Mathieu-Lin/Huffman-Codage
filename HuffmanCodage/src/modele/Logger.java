@@ -8,12 +8,21 @@ import java.io.FileOutputStream;
 import java.io.BufferedOutputStream;
 
 public class Logger {
-	// Attributs
+	/*********
+	 * Attributs
+	 */
     private PrintWriter sortieTxt;
     private BufferedOutputStream sortieBin;
 	private String cheminBase = "../Data/Compressed_data/";
 
-    // Constructeur pour enregistrer
+	/*********
+	 * Constructeur
+	 * 
+	 */
+	/**
+	 * @param fichier
+	 * @param texte
+	 */
     public Logger(String fichier, boolean texte) {
     	fichier = cheminBase + fichier;
         if (texte) { // Pour texte
@@ -33,8 +42,14 @@ public class Logger {
             }
         }
     }
-
-    // Méthode pour logger du texte
+	/*********
+	 * Méthodes
+	 */
+    /**
+     * Méthode pour logger du texte
+     * @param taille
+     * @param message
+     */
     public void logTxt(int taille,Map<String,Integer> message) {
         if (this.sortieTxt != null) {
         	this.sortieTxt.println(taille);
@@ -46,7 +61,10 @@ public class Logger {
         }
     }
 
-    // Méthode pour logger du binaire
+    /**
+     * Méthode pour logger du binaire
+     * @param data
+     */
     public void logBin(byte[] data) {
         if (this.sortieBin != null) {
             try {
@@ -59,7 +77,9 @@ public class Logger {
         }
     }
 
-    // Méthode pour fermer les sorties proprement
+    /**
+     * Méthode pour fermer les sorties proprement
+     */
     public void close() {
         try {
             if (this.sortieTxt != null) {

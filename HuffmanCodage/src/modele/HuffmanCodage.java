@@ -1,7 +1,6 @@
 package modele;
 // Importation
 import java.util.ArrayList;
-import java.util.PriorityQueue; // Il permet obtenir une liste auto-triée un peu comme ArrayList (Pour éviter que le programme soit trop long)
 import java.util.LinkedHashMap; // Il permet obtenir un dictionnaire non auto-triée (HashMap est auto-triée)
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,7 +13,6 @@ public class HuffmanCodage {
 	 */
 	private ArrayList<String>list_uncompressed_data;
 	private Map<String, Integer>list_compressed_data = new LinkedHashMap<>();
-	//private PriorityQueue<Node>tree = new PriorityQueue<Node>();
 	private ArrayList<Node>tree = new ArrayList<Node>();;
 	private String brutText;
 	private String compressedText;
@@ -126,34 +124,10 @@ public class HuffmanCodage {
 	 * 
 	 */
 	
-	/**
-	 * buildTree construit un arbre de façon itératif 
-	 * @param
-	 * @return
-	 */
-	/*
-    public Node buildTree() {
-        // Étape 1: Créer un arbre (feuille) pour chaque caractère
-    	
-    	// boucle for dont Entry prend l'élément du dictionnaire 
-        for (Entry<String, Integer> entry : this.list_compressed_data.entrySet()) {
-        	// Ajout vers une nouvelle liste 
-            this.tree.add(new Node(entry.getKey(), entry.getValue()));
-        }
 
-        // Étape 2: Fusionner les arbres jusqu'à ce qu'il n'en reste qu'un
-        
-        while (this.tree.size() > 1) {
-        	// poll() permet de prendre le petit élément de la liste et le supprimer de la liste 
-        	// "un peu comme liste.pop() en python" 
-            Node left = this.tree.poll(); // t1
-            Node right = this.tree.poll(); // t2
-            Node parent = new Node(left, right); // Nouveau nœud parent t
-            this.tree.add(parent);
-        }
-        return this.tree.poll(); // L'arbre final restant
-    }
-    */
+	/**
+	 * Transforme de type Map vers Array / Liste
+	 */
 	public void mapToArray () {
         // Étape 1: Créer un arbre (feuille) pour chaque caractère
     	
@@ -163,10 +137,13 @@ public class HuffmanCodage {
             this.tree.add(new Node(entry.getKey(), entry.getValue()));
         }
 	}
+	/**
+	 * Tri à bulle des noeuds
+	 */
 	public void triArray () {
 		for (int i = 0; i<this.tree.size()-1; i++ ) {
 			for (int j =0; j<this.tree.size() - i - 1; j++) {
-				if (this.tree.get(j).getFrequency() > this.tree.get(i).getFrequency()) {
+				if (this.tree.get(j).getFrequency() > this.tree.get(j+1).getFrequency()) {
 					Node temp = this.tree.get(j);
 					this.tree.set(j, this.tree.get(j+1));
 					this.tree.set(j+1, temp);
@@ -174,6 +151,12 @@ public class HuffmanCodage {
 			}
 		}
 	}
+	
+	/**
+	 * buildTree construit un arbre de façon itératif 
+	 * @param
+	 * @return
+	 */
 	public Node buildTree () {
 		this.mapToArray();
         while (this.tree.size() > 1) {
@@ -196,8 +179,11 @@ public class HuffmanCodage {
 	 * Partie 3 : Codage du texte
 	 * 
 	 */
-
-    // Méthode pour encoder le texte en utilisant les codes générés
+	/**
+	 * pour encoder le texte en utilisant les codes générés
+	 * @param codes
+	 * @return
+	 */
     public String encodeText(Map<String, String> codes) {
     	String text = this.brutText;
         StringBuilder encodedText = new StringBuilder();
@@ -215,7 +201,11 @@ public class HuffmanCodage {
         return encodedText.toString();
     }
     
-    // Conversion d'une chaîne de bits en un tableau d'octets
+    /**
+     * Conversion d'une chaîne de bits en un tableau d'octets
+     * @param bits
+     * @return
+     */
     public static byte[] bitsToBytes(String bits) {
         int byteCount = (bits.length() + 7) / 8;
         byte[] bytes = new byte[byteCount];
@@ -258,12 +248,19 @@ public class HuffmanCodage {
 	 * 
 	 */
     
-    // Méthode pour calculer le nombre total de bits dans une chaîne de codes compressés
+    /**
+     *  pour calculer le nombre total de bits dans une chaîne de codes compressés
+     * @return
+     */
     public int countBits() {
         return this.compressedText.length();
     }
 
-    // Méthode pour calculer le nombre moyen de bits de stockage par caractère dans le texte compressé
+    /**
+     * pour calculer le nombre moyen de bits de stockage par caractère dans le texte compressé
+     * @param nombreCaractères
+     * @return
+     */
     public double averageBitsPerCharacter( int nombreCaractères) {
         int nombreBits = countBits();
         return (double) nombreBits / (double) nombreCaractères;

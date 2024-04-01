@@ -3,6 +3,8 @@ package modele;
 import java.util.HashMap;
 import java.util.Map;
 
+import vue.HuffmanCodageJFrame;
+
 //import java.io.File;
 
 
@@ -10,32 +12,32 @@ import java.util.Map;
 public class Tester {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("Coucou");
-		/*
-        String chemin = "../Data/Uncompressed_data/textesimple.txt";
-        System.out.println(chemin.toString());
-        File fichier = new File(chemin);
-        System.out.println(fichier.toString());
-        // Vérifier si le fichier existe
-        if (fichier.exists()) {
-            // Fichier existe, faire ce que vous voulez avec
-            System.out.println("Le fichier existe !");
-        } else {
-            // Fichier n'existe pas
-            System.out.println("Le fichier n'existe pas !");
-        }
-        */
+    	/***************************************************************************
+    	 * Partie 0 : Lecture
+    	 * 
+    	 */
+		
 		Reader r = new Reader("bonjour.txt");
 		
+		/***************************************************************************
+		 * Partie 1 : Du fichier .txt vers du type dictionnaire
+		 * 
+		 */
 		System.out.println(r.getContenu().get(0));
 		HuffmanCodage hfc = new HuffmanCodage(r.getContenu(),r.getTexteBrut());
 		Map<String, Integer> donnees = hfc.transformData();
 		hfc.displayListCompressedData();
+		
+		/***************************************************************************
+		 * Partie 2 : Construction de l'arbre
+		 * 
+		 */
 		Node n = hfc.buildTree();
 		
-		/**
-		 * Codage Huffman
+		
+		/***************************************************************************
+		 * Partie 3 : Codage du texte
+		 * 
 		 */
 	    Map<String, String> codes = new HashMap<String, String>();
 	    String code = "";
@@ -49,11 +51,13 @@ public class Tester {
         // Conversion en octets et stockage 
         byte[] encodedBytes = hfc.bitsToBytes(encodedText);
         
+    	/***************************************************************************
+    	 * Partie 4 : Taux de compression 
+    	 * 
+    	 */
         // Début de comparaison
         String texteInitial = hfc.getTextBrut();
         String texteCompressé = encodedBytes.toString();
-
-        // Taux de compression
         int volumeInitial = hfc.countBytes();
         int volumeFinal = encodedBytes.length;
         
@@ -63,7 +67,10 @@ public class Tester {
         System.out.println("Volume final : " + volumeFinal + " octets");
         System.out.println("Taux de compression : " + (tauxCompression * 100) + "%");
        
-        // Moyenne 
+    	/***************************************************************************
+    	 * Partie 5 : Détermination du nombre moyen de bits de stockage d’un caractère du texte compressé
+    	 * 
+    	 */
         // Début de comparaison
         String texteCompresse = ""; // Initialisation de la chaîne compressée
         for (byte b : encodedBytes) {
@@ -77,15 +84,28 @@ public class Tester {
         
         System.out.println("Nombre moyen de bits de stockage par caractère dans le texte compressé : " + moyenneBitsParCaractère);
        
-        // Logger
-        Logger loggerTexte = new Logger("bonjour.txt", true);
+    	/***************************************************************************
+    	 * Partie 6 : Enregistrement  
+    	 * 
+    	 */
+        Logger loggerTexte = new Logger("alice_freq.txt", true);
         loggerTexte.logTxt(hfc.getTaille(),hfc.getList_compressed_data());
         loggerTexte.close();
         
-        Logger loggerBinaire = new Logger("bonjour.bin", false);
+        Logger loggerBinaire = new Logger("alice_comp.bin", false);
         loggerBinaire.logBin(encodedBytes);
         loggerBinaire.close();
         
+    	/***************************************************************************
+    	 * Partie 7 : Interface  
+    	 * 
+    	 */
+        HuffmanCodageJFrame hfcJF = new HuffmanCodageJFrame(r,hfc);
+        
+    	/***************************************************************************
+    	 * Partie 8 : Encore encore... 
+    	 * 
+    	 */
 	}
 
 }

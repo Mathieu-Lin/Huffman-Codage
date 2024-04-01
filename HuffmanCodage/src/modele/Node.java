@@ -3,11 +3,16 @@ package modele;
 import java.util.Map;
 
 public class Node{
-	// Attributs
+	/*********
+	 * Attributs
+	 */
     private String key;
     private int frequency;
     private Node left, right;
-	// Constructeur
+	/*********
+	 * Constructeur
+	 * 
+	 */
 	public Node (String key, int frequency, Node left, Node right){
 		this.key = key;
 		this.frequency = frequency;
@@ -31,22 +36,22 @@ public class Node{
         this.left = left;
         this.right = right;
     }
-	// Méthodes
+	/*********
+	 * Méthodes
+	 */
     
-    /** vérifier si le nœud est une feuille
-     * 
-     * @return
-     */
-    public boolean isLeaf() {
-        return left == null && right == null;
-    }
+
+
     
     
-    /** Complète "code" en chaine des caractères qui contient les nombres binaires
-     * Utilisation du parcours en profondeur et récursif
-     * @param 
-     * @return
-     */
+ 
+     /**
+      * Complète "code" en chaine des caractères qui contient les nombres binaires
+      * Utilisation du parcours en profondeur et récursif
+      * @param node
+      * @param code
+      * @param codes
+      */
     public static void depthCode(Node node, String code, Map<String, String> codes) {
         if (node != null) {
             if (node.getLeft() == null && node.getRight() == null) {
@@ -59,11 +64,11 @@ public class Node{
         }
     }
     
-    /** Affiche de manière récursif l'arbre du noeud
-     * @param 
-     * @return
+    /**
+     * Affiche de manière récursif l'arbre du noeud
+     * @param prefix
+     * @param isTail
      */
-    // Méthode d'aide récursive pour l'affichage de l'arbre
     public void printTree(String prefix, boolean isTail) {
         System.out.println(prefix + (isTail ? "└── " : "├── ") + key + " : " + frequency);
         if (left != null) {
@@ -73,7 +78,10 @@ public class Node{
             right.printTree(prefix + (isTail ? "    " : "│   "), true);
         }
     }
-	// Getters/setters
+    
+	/*********
+	 * Getters/Setters
+	 */
 	public String getKey() {
 		return key;
 	}

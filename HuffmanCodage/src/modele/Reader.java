@@ -18,6 +18,10 @@ public class Reader {
 	/*********
 	 * Constructeur
 	 */
+	/**
+	 * 
+	 * @param nomFichier
+	 */
 	public Reader(String nomFichier) {
 		this.nomFichier = "../Data/Uncompressed_data/" + nomFichier; // Enregistre le nom du fichier
 		// Début de la récupération des données du fichier
