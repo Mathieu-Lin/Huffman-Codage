@@ -17,7 +17,7 @@ public class Tester {
     	 * 
     	 */
 		
-		Reader r = new Reader("alice.txt");
+		Reader r = new Reader("bonjour.txt");
 		
 		/***************************************************************************
 		 * Partie 1 : Du fichier .txt vers du type dictionnaire

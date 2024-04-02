@@ -17,17 +17,20 @@ public class LoggerButtonListener implements ActionListener {
 	private JTextArea t;
 	private JTextArea response;
 	private HuffmanCodage hfc;
+	private ReaderButtonListener r;
     // Constructeur
-    public LoggerButtonListener(JTextArea t, JTextArea response, HuffmanCodage hfc) {
+    public LoggerButtonListener(JTextArea t, JTextArea response, HuffmanCodage hfc,ReaderButtonListener r) {
     	this.t = t;
     	this.response = response;
     	this.hfc = hfc;
+    	this.r = r;
     }
 
     // Méthode appelée lorsque le bouton "Logger" est cliqué
     @Override
     public void actionPerformed(ActionEvent e) {
     	// Voir tester.java
+    	this.hfc = this.r.getHfc();
 		Node n = hfc.buildTree();
 	    Map<String, String> codes = new HashMap<String, String>();
 	    String code = "";

@@ -33,7 +33,8 @@ public class ReaderButtonListener implements ActionListener {
             this.r = new Reader(selectedFile.getName()); 
             this.t.setText(this.r.getTexteBrut());
             this.hfc = new HuffmanCodage(r.getContenu(),r.getTexteBrut());
-//            
+            this.hfc.transformData();
+//      
         }
     }
 	public Reader getR() {

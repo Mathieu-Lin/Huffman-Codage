@@ -74,13 +74,11 @@ public class HuffmanCodageJFrame extends JFrame {
         // Création de l'objet pour la gestion des événements
         
         ReaderButtonListener readerActionListener = new ReaderButtonListener(this.r,textArea,this.hfc);
-        readerActionListener.setHfc(this.hfc);
         
         // Ajout du gestionnaire d'événements pour le bouton "Reader"
         readerButton.addActionListener(readerActionListener);
-        
         // Création de l'objet pour la gestion des événements
-        LoggerButtonListener loggerActionListener = new LoggerButtonListener(textArea,information,readerActionListener.getHfc());
+        LoggerButtonListener loggerActionListener = new LoggerButtonListener(textArea,information,this.hfc,readerActionListener);
 
         // Ajout du gestionnaire d'événements pour le bouton "Logger"
         loggerButton.addActionListener(loggerActionListener);
