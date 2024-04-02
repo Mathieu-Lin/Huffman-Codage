@@ -33,7 +33,25 @@ public class ReaderButtonListener implements ActionListener {
             this.r = new Reader(selectedFile.getName()); 
             this.t.setText(this.r.getTexteBrut());
             this.hfc = new HuffmanCodage(r.getContenu(),r.getTexteBrut());
-            
+//            
         }
     }
+	public Reader getR() {
+		return r;
+	}
+	public void setR(Reader r) {
+		this.r = r;
+	}
+	public JTextArea getT() {
+		return t;
+	}
+	public void setT(JTextArea t) {
+		this.t = t;
+	}
+	public HuffmanCodage getHfc() {
+		return hfc;
+	}
+	public void setHfc(HuffmanCodage hfc) {
+		this.hfc = hfc;
+	}
 }
