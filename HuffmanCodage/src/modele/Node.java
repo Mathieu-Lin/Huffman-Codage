@@ -59,6 +59,7 @@ public class Node{
                 codes.put(node.getKey(), code);
             }
             // Parcourir l'arbre récursivement pour générer les codes
+            // d'abord à gauche puis à droite
             depthCode(node.getLeft(), code + "0", codes);
             depthCode(node.getRight(), code + "1", codes);
         }
@@ -72,9 +73,11 @@ public class Node{
     public void printTree(String prefix, boolean isTail) {
         System.out.println(prefix + (isTail ? "└── " : "├── ") + key + " : " + frequency);
         if (left != null) {
+        	// à gauche
             left.printTree(prefix + (isTail ? "    " : "│   "), right == null);
         }
         if (right != null) {
+        	// à droite
             right.printTree(prefix + (isTail ? "    " : "│   "), true);
         }
     }

@@ -1,4 +1,5 @@
 package modele;
+import java.math.BigInteger;
 // Importation
 import java.util.ArrayList;
 import java.util.LinkedHashMap; // Il permet obtenir un dictionnaire non auto-triée (HashMap est auto-triée)
@@ -158,7 +159,7 @@ public class HuffmanCodage {
 	 * @return
 	 */
 	public Node buildTree () {
-		this.mapToArray();
+		this.mapToArray(); // Transformation de dictionnaire en liste des noeuds
         while (this.tree.size() > 1) {
         	// poll() permet de prendre le petit élément de la liste et le supprimer de la liste 
         	// "un peu comme liste.pop() en python" 
@@ -166,9 +167,9 @@ public class HuffmanCodage {
             Node left = this.tree.get(0); // t1
             Node right = this.tree.get(1); // t2
             Node parent = new Node(left, right); // Nouveau nœud parent t
-            this.tree.remove(1);
+            this.tree.remove(1); // On retire les deux premiers
             this.tree.remove(0);
-            this.tree.add(parent);
+            this.tree.add(parent); // On ajoute un parent 
 
         }
         return this.tree.get(0); // L'arbre final restant
@@ -193,8 +194,8 @@ public class HuffmanCodage {
             if (code != null) {
                 encodedText.append(code); // Concaténer le code binaire
             } else {
-                // Si le code n'est pas trouvé pour ce caractère, vous pouvez gérer cette situation
-                // Ici, j'ajoute un message d'erreur et continue avec le reste du texte
+                // Si le code n'est pas trouvé pour ce caractère,
+                // envoie d'un message d'erreur
                 System.err.println("Code introuvable pour le caractère : " + character);
             }
         }
@@ -202,19 +203,18 @@ public class HuffmanCodage {
     }
     
     /**
-     * Conversion d'une chaîne de bits en un tableau d'octets
-     * @param bits
-     * @return
+     * Conversion d'une chaîne de bits en un tableau d'octets Necessite appel à une biblio de math 
+     * @param bits comme "01010111110101010010101"
+     * @return bytes (format octets)
      */
     public static byte[] bitsToBytes(String bits) {
-        int byteCount = (bits.length() + 7) / 8;
-        byte[] bytes = new byte[byteCount];
+        // Convertit la chaîne de bits en un BigInteger
+        BigInteger bInteger = new BigInteger(bits, 2);
         
-        for (int i = 0; i < bits.length(); i++) {
-            if (bits.charAt(i) == '1') {
-                bytes[i / 8] |= 1 << (7 - (i % 8));
-            }
-        }
+        // Convertit le BigInteger en un tableau d'octets
+        byte[] bytes = bInteger.toByteArray();
+        
+        // Retourne le tableau d'octets
         return bytes;
     }
     
