@@ -203,16 +203,19 @@ public class HuffmanCodage {
     }
     
     /**
-     * Conversion d'une chaîne de bits en un tableau d'octets Necessite appel à une biblio de math 
-     * @param bits comme "01010111110101010010101"
-     * @return bytes (format octets)
+     * Conversion d'une chaîne de bits en un tableau d'octets
+     * @param bits
+     * @return
      */
     public static byte[] bitsToBytes(String bits) {
-        // Convertit la chaîne de bits en un BigInteger
-        BigInteger bInteger = new BigInteger(bits, 2);
+        int byteCount = (bits.length() + 7) / 8;
+        byte[] bytes = new byte[byteCount];
         
-        // Convertit le BigInteger en un tableau d'octets
-        byte[] bytes = bInteger.toByteArray();
+        for (int i = 0; i < bits.length(); i++) {
+            if (bits.charAt(i) == '1') {
+                bytes[i / 8] |= 1 << (7 - (i % 8));
+            }
+        }
         
         // Retourne le tableau d'octets
         return bytes;

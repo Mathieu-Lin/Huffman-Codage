@@ -88,11 +88,11 @@ public class Tester {
     	 * Partie 6 : Enregistrement  
     	 * 
     	 */
-        Logger loggerTexte = new Logger("alice_freq.txt", true);
+        Logger loggerTexte = new Logger("bonjour_freq.txt", true);
         loggerTexte.logTxt(hfc.getTaille(),hfc.getList_compressed_data());
         loggerTexte.close();
         
-        Logger loggerBinaire = new Logger("alice_comp.bin", false);
+        Logger loggerBinaire = new Logger("boujour_comp.bin", false);
         loggerBinaire.logBin(encodedBytes);
         loggerBinaire.close();
         
