@@ -50,7 +50,12 @@ public class Tester {
         
         // Conversion en octets et stockage 
         byte[] encodedBytes = hfc.bitsToBytes(encodedText);
-        
+        String reste = hfc.restes(encodedText);
+        // Affichage de chaque byte
+        for (byte b : encodedBytes) {
+            System.out.print(b + " ");
+        }
+        System.out.println("Reste : "+ reste);
     	/***************************************************************************
     	 * Partie 4 : Taux de compression 
     	 * 
@@ -92,7 +97,11 @@ public class Tester {
         loggerTexte.logTxt(hfc.getTaille(),hfc.getList_compressed_data());
         loggerTexte.close();
         
-        Logger loggerBinaire = new Logger("boujour_comp.bin", false);
+        Logger loggerBits = new Logger("bonjour_bits.txt");
+        loggerBits.logBits(reste);
+        loggerBits.close();
+        
+        Logger loggerBinaire = new Logger("bonjour_comp.bin", false);
         loggerBinaire.logBin(encodedBytes);
         loggerBinaire.close();
         

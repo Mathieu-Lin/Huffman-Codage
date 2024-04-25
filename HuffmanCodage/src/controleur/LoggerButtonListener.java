@@ -37,6 +37,7 @@ public class LoggerButtonListener implements ActionListener {
         n.depthCode(n, code, codes);
         String encodedText = hfc.encodeText(codes);
         byte[] encodedBytes = hfc.bitsToBytes(encodedText);
+        String reste = hfc.restes(encodedText);
         String texteInitial = hfc.getTextBrut();
         String texteCompressé = encodedBytes.toString();
         int volumeInitial = hfc.countBytes();
@@ -73,6 +74,10 @@ public class LoggerButtonListener implements ActionListener {
         Logger loggerTexte = new Logger(response.getText()+"_freq.txt", true);
         loggerTexte.logTxt(hfc.getTaille(),hfc.getList_compressed_data());
         loggerTexte.close();
+        
+        Logger loggerBits = new Logger(response.getText()+"_bits.txt");
+        loggerBits.logBits(reste);
+        loggerBits.close();
         
         Logger loggerBinaire = new Logger(response.getText()+"_comp.bin", false);
         loggerBinaire.logBin(encodedBytes);

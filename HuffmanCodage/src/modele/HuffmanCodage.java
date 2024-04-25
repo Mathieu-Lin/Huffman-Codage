@@ -185,7 +185,7 @@ public class HuffmanCodage {
 	 * @param codes
 	 * @return
 	 */
-    public String encodeText(Map<String, String> codes) {
+    public String encodeText(Map<String, String> codes) { 
     	String text = this.brutText;
         StringBuilder encodedText = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
@@ -196,7 +196,7 @@ public class HuffmanCodage {
             } else {
                 // Si le code n'est pas trouvé pour ce caractère,
                 // envoie d'un message d'erreur
-                System.err.println("Code introuvable pour le caractère : " + character);
+                //System.err.println("Code introuvable pour le caractère : " + character);
             }
         }
         return encodedText.toString();
@@ -208,17 +208,25 @@ public class HuffmanCodage {
      * @return
      */
     public static byte[] bitsToBytes(String bits) {
-        int byteCount = (bits.length() + 7) / 8;
+        int byteCount = (bits.length()) / 8;
+
         byte[] bytes = new byte[byteCount];
-        
+
         for (int i = 0; i < bits.length(); i++) {
             if (bits.charAt(i) == '1') {
-                bytes[i / 8] |= 1 << (7 - (i % 8));
+                bytes[i / 8] |= (1 << (7 - (i % 8)));
             }
         }
-        
+
         // Retourne le tableau d'octets
         return bytes;
+    }
+    
+    public static String restes(String bits) {
+        int reste = bits.length() % 8;
+
+        // Retourne le reste de la chaîne
+        return bits.substring(bits.length() - reste);
     }
     
 	/***************************************************************************

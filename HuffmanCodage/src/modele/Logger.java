@@ -12,6 +12,7 @@ public class Logger {
 	 * Attributs
 	 */
     private PrintWriter sortieTxt;
+    private PrintWriter sortieBits;
     private BufferedOutputStream sortieBin;
 	private String cheminBase = "../Data/Compressed_data/";
 
@@ -23,6 +24,17 @@ public class Logger {
 	 * @param fichier
 	 * @param texte
 	 */
+	public Logger(String fichier) {
+		fichier = cheminBase + fichier;
+		try {
+            FileWriter f = new FileWriter(fichier);
+            BufferedWriter b = new BufferedWriter(f);
+            this.sortieBits = new PrintWriter(b);
+        } catch (Exception e) {
+            System.err.println("Erreur lors de l'initialisation du Logger pour texte");
+        }
+	}
+	
     public Logger(String fichier, boolean texte) {
     	fichier = cheminBase + fichier;
         if (texte) { // Pour texte
@@ -61,6 +73,13 @@ public class Logger {
         }
     }
 
+    public void logBits(String chars) {
+        if (this.sortieBits != null) {
+    	    this.sortieBits.println(chars);
+        } else {
+            System.err.println("Logger texte non initialisé");
+        }
+    }
     /**
      * Méthode pour logger du binaire
      * @param data
@@ -87,6 +106,9 @@ public class Logger {
             }
             if (this.sortieBin != null) {
                 this.sortieBin.close();
+            }
+            if (this.sortieBits != null) {
+            	this.sortieBits.close();
             }
         } catch (Exception e) {
             System.err.println("Erreur lors de la fermeture des sorties");
