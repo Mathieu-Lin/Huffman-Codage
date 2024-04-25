@@ -208,11 +208,11 @@ public class HuffmanCodage {
      * @return
      */
     public static byte[] bitsToBytes(String bits) {
-        int byteCount = (bits.length()) / 8;
-
+    	int byteCount = (int) (bits.length() / 8);
+    	int reste = bits.length() % 8;
         byte[] bytes = new byte[byteCount];
 
-        for (int i = 0; i < bits.length(); i++) {
+        for (int i = 0; i < bits.length()-reste; i++) {
             if (bits.charAt(i) == '1') {
                 bytes[i / 8] |= (1 << (7 - (i % 8)));
             }
