@@ -187,17 +187,29 @@ public class HuffmanCodage {
 	 */
     public String encodeText(Map<String, String> codes) { 
     	String text = this.brutText;
+    	System.out.println(text.length());
         StringBuilder encodedText = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
             String character = text.substring(i, i + 1); // Récupérer chaque caractère sous forme de chaîne
-            String code = codes.get(character); // Récupérer le code binaire correspondant à ce caractère
-            if (code != null) {
-                encodedText.append(code); // Concaténer le code binaire
-            } else {
-                // Si le code n'est pas trouvé pour ce caractère,
-                // envoie d'un message d'erreur
-                //System.err.println("Code introuvable pour le caractère : " + character);
-            }
+            if ("\n".equals(character)) {
+                String code = codes.get("Saut");
+                if (code != null) {
+                    encodedText.append(code); // Concaténer le code binaire
+                } else {
+                    // Si le code n'est pas trouvé pour ce caractère,
+                    // envoie d'un message d'erreur
+                    //System.err.println("Code introuvable pour le caractère : " + character);
+                }
+            }else {
+            	String code = codes.get(character); // Récupérer le code binaire correspondant à ce caractère
+                if (code != null) {
+                    encodedText.append(code); // Concaténer le code binaire
+                } else {
+                    // Si le code n'est pas trouvé pour ce caractère,
+                    // envoie d'un message d'erreur
+                   //System.err.println("Code introuvable pour le caractère : " + character);
+                }
+            }            
         }
         return encodedText.toString();
     }
